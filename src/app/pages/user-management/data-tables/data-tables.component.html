@@ -1,0 +1,60 @@
+<table datatable [dtOptions]="dtOptions" class="row-border hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th class="text-center">Action</th>
+        </tr>
+    </thead>
+    <tbody *ngIf="persons?.length != 0">
+        <tr *ngFor="let person of persons">
+            <td>{{ person.id }}</td>
+            <td>{{ person.firstName }}</td>
+            <td>{{ person.lastName }}</td>
+            <td class="text-center">
+                <div placement="bottom-right">
+                    <button class="btn" title="View"><i class="fas fa-street-view" (click)="viewUser(content,person)"></i></button>
+                    <button class="btn" title="Edit"><i class="fas fa-edit" (click)="editUser(content,person)"></i></button>
+                    <button class="btn" title="Delete"><i class="fa fa-trash" (click)="deleteUser(person)"></i></button>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+    <tbody *ngIf="persons?.length == 0">
+        <tr>
+            <td colspan="4" class="no-data-available">No data!</td>
+        </tr>
+    <tbody>
+</table>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">User Details</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label for="id">Id</label>
+                <div class="input-group">
+                    <input id="id" class="form-control" value="{{personDetail.id}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="first-name">First name</label>
+                <div class="input-group">
+                    <input id="first-name" class="form-control" value="{{personDetail.firstName}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="last-name">Last name</label>
+                <div class="input-group">
+                    <input id="last-name" class="form-control" value="{{personDetail.lastName}}">
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>
